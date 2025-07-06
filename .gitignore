@@ -1,0 +1,15 @@
+# .gitignore
+.git
+.env
+*.pyc
+__pycache__/
+*.sqlite3
+*.log
+.venv/
+env/
+venv/
+.venv/
+.DS_Store
+.idea/
+.vscode/
+celerybeat-schedule
