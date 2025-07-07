@@ -114,24 +114,25 @@ alx_travel_app/
 ├── .env.example                 # Environment variable template
 ├── .gitignore                   # Git ignore rules
 ├── manage.py                    # Django management script
-├── requirements.txt             # Project dependencies
 │
 ├── alx_travel_app/              # Main project package
 │   ├── __init__.py
 │   ├── asgi.py
+|   ├── requirement.txt          # Project dependencies
 │   ├── settings.py              # Project settings
 │   ├── urls.py                  # Main URL configuration
-│   └── wsgi.py
-│
-└── listings/                    # Listings application
-    ├── migrations/              # Database migrations
-    ├── __init__.py
-    ├── admin.py                 # Admin configuration
-    ├── apps.py                  # App configuration
-    ├── models.py                # Database models
-    ├── tests.py                 # Application tests
-    ├── urls.py                  # App URL routes
-    └── views.py                 # API views
+│   ├── wsgi.py
+|   └── listings/                # Listings application
+        ├── migrations/          # Database migrations
+        ├── __init__.py
+        ├── admin.py             # Admin configuration
+        ├── apps.py              # App configuration
+        ├── models.py            # Database models
+        ├── tests.py             # Application tests
+        ├── urls.py              # App URL routes
+        └── views.py             # API views
+│   └── README.md
+
 ```
 
 ## License
