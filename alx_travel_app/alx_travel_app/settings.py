@@ -16,16 +16,26 @@ from pathlib import Path
 
 import environ
 
-# Initialize environment
-env = environ.Env()
+# Initialize environ
+env = environ.Env(
+    # Set casting and default values
+    DEBUG=(bool, True),
+    SECRET_KEY=(str, "SECRET_KEY"),
+    DJANGO_ALLOWED_HOSTS=(list, ["localhost", "127.0.0.1"]),
+    DB_NAME=(str, "DB_NAME"),
+    DB_USER=(str, "DB_USER"),
+    DB_PASSWORD=(str, "DB_PASSWORD"),
+    DB_HOST=(str, "DB_HOST"),
+    DB_PORT=(str, "DB_PORT"),
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Read .env file if exists using pathlib
+# Take environment variables from .env file
 env_file = BASE_DIR / ".env"
 if env_file.exists():
-    env.read_env(env_file)
+    environ.Env.read_env(env_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -34,9 +44,9 @@ if env_file.exists():
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS")
 
 
 # Application definition
@@ -97,12 +107,9 @@ DATABASES = {
         "NAME": env("MYSQL_DATABASE"),
         "USER": env("MYSQL_USER"),
         "PASSWORD": env("MYSQL_PASSWORD"),
-        "HOST": env("MYSQL_HOST", default="localhost"),
-        "PORT": env("MYSQL_PORT", default="3306"),
-        "OPTIONS": {
-            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
-    }
+        "HOST": env("MYSQL_HOST"),
+        "PORT": env("MYSQL_PORT"),
+    },
 }
 
 
@@ -141,6 +148,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Media files
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
